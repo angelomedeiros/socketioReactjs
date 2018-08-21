@@ -8,6 +8,13 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+var io  = require('socket.io')()
+
+app.io = io
+
+io.on('connection', function(socket) {
+  console.log('Conexão estabelecida!')
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
