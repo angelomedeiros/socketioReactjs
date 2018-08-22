@@ -26,3 +26,21 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.me {
+  list-style-type: none;
+  background-color: green;
+  color: white;
+  padding: 4px 0;
+  width: 200px;
+  margin: 5px auto;
+}
+
+.you {
+  list-style-type: none;
+  background-color: cadetblue;
+  color: white;
+  padding: 4px 0;
+  width: 200px;
+  margin: 5px auto;
+}
