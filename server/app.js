@@ -12,8 +12,17 @@ var io  = require('socket.io')()
 
 app.io = io
 
-io.on('connection', function(socket) {
+app.io.on('connection', function(socket) {
   console.log('Conexão estabelecida!')
+
+  socket.on('disconnect', () => {
+    console.log('Conexão perdida!')
+  })
+
+  socket.on('chat message', (msg) => {
+    console.log('message: ' + msg);
+  })
+
 })
 
 // view engine setup
