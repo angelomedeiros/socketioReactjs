@@ -5,6 +5,7 @@ import $ from 'jquery'
 import logo from './logo.svg';
 import logoSocket from './socket.svg';
 import './App.css';
+import mensagens from './mensagens'
 
 class App extends Component {
 
@@ -21,6 +22,15 @@ class App extends Component {
         $('#messages').append($('<li class=\'you\'>').text(msg));
       });
     })()
+
+    console.log('Teste', io)
+
+  }
+
+  getMenssager() {
+    return mensagens.map( (mensagem, index) => (
+      <li className='me' key={index}>{mensagem.author}</li>
+    ))
   }
 
   render() {
@@ -38,7 +48,9 @@ class App extends Component {
           <input id="m" autoComplete="off" />
           <button>Send</button>
         </form>
-        <ul id="messages"></ul>
+        <ul id="messages">
+          {this.getMenssager()}
+        </ul>
       </div>
     );
   }

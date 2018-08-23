@@ -13,18 +13,32 @@ var io  = require('socket.io')()
 app.io = io
 
 app.io.on('connection', function(socket) {
-  console.log('Conexão estabelecida!')
 
   socket.on('disconnect', () => {
-    console.log('Conexão perdida!')
+    console.log('Conexão perdida! com "/" ')
   })
 
   socket.on('chat message', (msg) => {
     socket.broadcast.emit('chat message', msg)
-    console.log('message: ' + msg);
   })
 
-  // io.emit('some event', { for: 'everyone' })
+})
+
+const nsp = app.io.of('/chat')
+nsp.on('connection', (socket) => {
+
+  socket.on('join', (chatId) => {
+    socket.join(chatId)
+  })
+
+  socket.on('disconnect', () => {
+    console.log('Conexão perdida! com "/chat" ')
+  })
+
+  socket.on('newMessage', (chatId, message) => {    
+    socket.broadcast.to(chatId).emit('addMessage', message)
+  })
+
 
 })
 
